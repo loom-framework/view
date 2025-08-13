@@ -1,0 +1,35 @@
+# box.obj
+#
+# Sweet Home 3D, Copyright (c) 2019 Emmanuel PUYBARET / eTeks <info@eteks.com>
+#
+# This file is distributed at your choice, under the CC-BY Creative Commons Attribution 3.0 Unported license 
+# available at http://creativecommons.org/licenses/by.0/ or under the terms of the GNU General Public License 
+# as published by the Free Software Foundation and available at http://www.gnu.org/copyleft/gpl.txt
+#
+mtllib box.mtl
+v 0 0 0
+v 1 0 0
+v 1 0 1
+v 0 0 1
+v 0 1 0
+v 1 1 0
+v 1 1 1
+v 0 1 1
+g bottom
+usemtl bottom
+f 1 2 3 4
+g top
+usemtl top
+f 5 8 7 6
+g left
+usemtl left
+f 1 4 8 5
+g right
+usemtl right
+f 2 6 7 3
+g back
+usemtl back
+f 1 5 6 2
+g front
+usemtl front
+f 3 7 8 4

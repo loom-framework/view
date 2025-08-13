@@ -1,0 +1,16 @@
+# 3D model import /home/hpx/untitled.obj
+
+newmtl default
+illum 2
+Ka 0.4 0.4 0.4
+Kd 0.7102 0.702 0.6531
+Ks 0.3 0.3 0.3
+Ns 128.0
+
+newmtl path122_2
+illum 2
+Ka 1.0 1.0 1.0
+Kd 0.024158 0.005605 0.0
+Ks 0.5 0.5 0.5
+Ns 128.0
+Ni 1.0

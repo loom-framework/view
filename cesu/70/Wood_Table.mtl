@@ -1,0 +1,18 @@
+# 3D model import /home/hpx/Desktop/backup_dell/Wood Table with glasplatte/Wood_Table.obj
+
+newmtl Wood_Table
+illum 2
+Ka 1.0 1.0 1.0
+Kd 0.77945 0.77945 0.77945
+Ks 0.206477 0.106529 0.011122
+Ns 96.07843
+Ni 1.0
+
+newmtl Wood_Table_Glass
+illum 2
+Ka 1.0 1.0 1.0
+Kd 0.64 0.64 0.64
+Ks 0.5 0.5 0.5
+Ns 96.07843
+Ni 1.0
+d 0.39999998
