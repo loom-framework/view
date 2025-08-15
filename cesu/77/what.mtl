@@ -1,9 +1,0 @@
-# 3D model import /home/hpx/what.obj
-
-newmtl rect704_1
-illum 2
-Ka 1.0 1.0 1.0
-Kd 0.024158 0.005605 0.0
-Ks 0.5 0.5 0.5
-Ns 128.0
-Ni 1.0
