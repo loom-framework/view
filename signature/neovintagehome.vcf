@@ -1,0 +1,16 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Janis Bedeicis
+N:Bedeicis;Janis;;;
+ORG:Neovintage Home Ltd.
+TITLE:Corporate Project Manager
+EMAIL;TYPE=INTERNET,WORK:post@neovintagehome.com
+TEL;TYPE=WORK,VOICE:+35677771865
+ADR;TYPE=WORK:;;34,Triq il-Fuxa;San Ġwann;SGN 1303;Malta
+URL:https://www.neovintagehome.com
+PHOTO;VALUE=URI;TYPE=PNG:https://3d.neovintagehome.com/signature/neovintage_fav.png
+X-SOCIALPROFILE;TYPE=facebook:https://www.facebook.com/johndoe
+X-SOCIALPROFILE;TYPE=instagram:https://www.instagram.com/johndoe
+X-SOCIALPROFILE;TYPE=youtube:https://www.youtube.com/johndoe
+NOTE:Neovintage Home Ltd. contact card
+END:VCARD
