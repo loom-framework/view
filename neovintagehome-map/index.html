@@ -3,53 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Retro Map with KML</title>
+  <title>Retro Map with KML + Street View Only</title>
   <style>
-    html, body { height: 100%; margin: 0; padding: 0; }
-    #map { width: 100%; height: 100%; }
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    #map {
+      width: 100%;
+      height: 100%;
+    }
   </style>
 </head>
 <body>
   <div id="map"></div>
 
+  <!-- Load Google Maps JavaScript API -->
   <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAE-A0Irud0EMWOQVANj048sBrgAMSfCV0&callback=initMap&v=weekly"
     async defer>
   </script>
 
-  <script>
-    function initMap() {
-      const retroStyle = [
-        { elementType: "geometry", stylers: [{ color: "#ebe3cd" }] },
-        { elementType: "labels.text.fill", stylers: [{ color: "#523735" }] },
-        { elementType: "labels.text.stroke", stylers: [{ color: "#f5f1e6" }] },
-        { featureType: "water", elementType: "geometry.fill", stylers: [{ color: "#b9d3c2" }] }
-      ];
-
-      const map = new google.maps.Map(document.getElementById("map"), {
-        center: { lat: 53.727946223940904, lng: 17.71066259801293 },
-        zoom: 4,
-        styles: retroStyle,
-        gestureHandling: "greedy",
-        disableDefaultUI: true,
-        streetViewControl: true
-      });
-
-      // ✅ Load KML directly (CORS-safe in Maps API)
-      const kmlUrl = "https://www.google.com/maps/d/u/0/kml?forcekml=1&mid=1T_TihQ5Qmy_rYiQdrJRSeIUtUOAHq-Q";
-      const kmlLayer = new google.maps.KmlLayer({
-        url: kmlUrl,
-        map: map,
-        preserveViewport: true,
-        suppressInfoWindows: false
-      });
-
-      kmlLayer.addListener("status_changed", () => {
-        console.log("KML Status:", kmlLayer.getStatus());
-      });
-    }
-
-    window.initMap = initMap;
-  </script>
+  <!-- Your external JS file -->
+  <script src="https://3d.neovintagehome.com/neovintagehome-map/map.js" defer></script>
 </body>
 </html>
