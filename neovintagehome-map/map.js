@@ -19,13 +19,13 @@ window.initMap = function() {
   });
 
   // Add KML base (visual only)
-  const kmlUrl = "https://www.google.com/maps/d/u/0/kml?forcekml=1&mid=1T_TihQ5Qmy_rYiQdrJRSeIUtUOAHq-Q";
+ /* const kmlUrl = "https://www.google.com/maps/d/u/0/kml?forcekml=1&mid=1T_TihQ5Qmy_rYiQdrJRSeIUtUOAHq-Q";
   new google.maps.KmlLayer({
     url: kmlUrl,
     map: map,
     preserveViewport: true,
     suppressInfoWindows: true
-  });
+  });*/
 
   // InfoWindow reused (single instance)
   const infoWindow = new google.maps.InfoWindow();
