@@ -1,4 +1,7 @@
-async function initMap() {
+// Attach initMap to window so Google Maps callback finds it
+window.initMap = function() {
+
+  // Retro map style
   const retroStyle = [
     { elementType: "geometry", stylers: [{ color: "#ebe3cd" }] },
     { elementType: "labels.text.fill", stylers: [{ color: "#523735" }] },
@@ -6,54 +9,48 @@ async function initMap() {
     { featureType: "water", elementType: "geometry.fill", stylers: [{ color: "#b9d3c2" }] }
   ];
 
+  // Create the map
   const map = new google.maps.Map(document.getElementById("map"), {
-    center: { lat: 53.7279, lng: 17.7106 },
-    zoom: 3,
+    center: { lat: 0, lng: 0 },
+    zoom: 2,
     styles: retroStyle,
     gestureHandling: "greedy",
     disableDefaultUI: true,
     streetViewControl: true
   });
 
-  // Optional: add KML for visual base (markers suppressed)
-  // const kmlLayer = new google.maps.KmlLayer({
-  //   url: "YOUR_KML_URL",
-  //   map: map,
-  //   preserveViewport: true,
-  //   suppressInfoWindows: true
-  // });
+  // Add live KML layer as background
+  const kmlUrl = "https://www.google.com/maps/d/u/0/kml?forcekml=1&mid=1T_TihQ5Qmy_rYiQdrJRSeIUtUOAHq-Q";
+  const kmlLayer = new google.maps.KmlLayer({
+    url: kmlUrl,
+    map: map,
+    preserveViewport: true,
+    suppressInfoWindows: true, // suppress default popups
+  });
 
-  // Load JSON markers
-  try {
-    const response = await fetch('markers.json');
-    const markers = await response.json();
+  // Custom marker icon
+  const markerIcon = "https://upload.wikimedia.org/wikipedia/commons/e/ec/RedDot.svg";
 
-    const iconUrl = 'https://cdn-icons-png.flaticon.com/512/684/684908.png';
+  // Load custom JSON markers
+  fetch('markers.json')
+    .then(res => res.json())
+    .then(markers => {
+      markers.forEach(m => {
+        const marker = new google.maps.Marker({
+          position: { lat: m.lat, lng: m.lng },
+          map: map,
+          icon: markerIcon,
+          title: m.title
+        });
 
-    markers.forEach(data => {
-      const marker = new google.maps.Marker({
-        position: { lat: data.lat, lng: data.lng },
-        map: map,
-        icon: {
-          url: iconUrl,
-          scaledSize: new google.maps.Size(40, 40)
-        }
+        const infoWindow = new google.maps.InfoWindow({
+          content: m.html
+        });
+
+        marker.addListener('click', () => {
+          infoWindow.open(map, marker);
+        });
       });
-
-      const popupContent = `
-        <div class="popup-content">
-          <h3>${data.name}</h3>
-          <img src="${data.image}" />
-          <p><a href="${data.link}" target="_blank">View More</a></p>
-        </div>
-      `;
-
-      const infowindow = new google.maps.InfoWindow({ content: popupContent });
-
-      marker.addListener("click", () => infowindow.open(map, marker));
-    });
-
-  } catch (err) {
-    console.error("Failed to load markers:", err);
-  }
-}
+    })
+    .catch(err => console.error("Failed to load markers:", err));
+};
