@@ -1,4 +1,4 @@
-async function initMap() {
+function initMap() {
   const retroStyle = [
     { elementType: "geometry", stylers: [{ color: "#ebe3cd" }] },
     { elementType: "labels.text.fill", stylers: [{ color: "#523735" }] },
@@ -15,59 +15,36 @@ async function initMap() {
     streetViewControl: true
   });
 
-  const KML_URL =
+  const kmlUrl =
     "https://www.google.com/maps/d/u/0/kml?forcekml=1&mid=1T_TihQ5Qmy_rYiQdrJRSeIUtUOAHq-Q";
 
-  // ✅ Temporary icon (you can replace this later)
-  const customIcon = {
-    url: "https://maps.gstatic.com/mapfiles/ms2/micons/red-dot.png", // default red pin
-    scaledSize: new google.maps.Size(32, 32),
-    anchor: new google.maps.Point(16, 32)
-  };
+  const kmlLayer = new google.maps.KmlLayer({
+    url: kmlUrl,
+    map: map,
+    preserveViewport: true,
+    suppressInfoWindows: false,
+  });
 
-  try {
-    const response = await fetch(KML_URL);
-    const kmlText = await response.text();
-    const parser = new DOMParser();
-    const xml = parser.parseFromString(kmlText, "text/xml");
-    const placemarks = xml.getElementsByTagName("Placemark");
+  const customIcon = "https://3d.neovintagehome.com/neovintagehome-map/neovintage_home.png"; // your custom marker PNG
 
-    const infoWindow = new google.maps.InfoWindow();
+  // KML doesn't expose markers directly, so we listen for click events and create our own info windows
+  const infoWindow = new google.maps.InfoWindow();
 
-    for (let i = 0; i < placemarks.length; i++) {
-      const name = placemarks[i].getElementsByTagName("name")[0]?.textContent || "Untitled";
-      const description = placemarks[i].getElementsByTagName("description")[0]?.textContent || "";
-      const coords = placemarks[i].getElementsByTagName("coordinates")[0]?.textContent.trim().split(",");
-      if (!coords || coords.length < 2) continue;
+  kmlLayer.addListener("click", function(event) {
+    const content = `
+      <div style="min-width:200px;">
+        <h3 style="margin:0;">${event.featureData.name}</h3>
+        <div>${event.featureData.description || ""}</div>
+        <a href="${event.featureData.link || "#"}" target="_blank">Open location</a>
+      </div>`;
+    infoWindow.setContent(content);
+    infoWindow.setPosition(event.latLng);
+    infoWindow.open(map);
+  });
 
-      const lng = parseFloat(coords[0]);
-      const lat = parseFloat(coords[1]);
+  kmlLayer.addListener("status_changed", () => {
+    console.log("KML status:", kmlLayer.getStatus());
+  });
 
-      const marker = new google.maps.Marker({
-        position: { lat, lng },
-        map,
-        icon: customIcon,
-        title: name
-      });
-
-      const popupContent = `
-        <div style="max-width:250px;font-family:Roboto,Arial,sans-serif;">
-          <h3 style="margin:0;color:#523735;">${name}</h3>
-          <p style="margin:4px 0;">${description}</p>
-          <button style="background:#523735;color:#fff;padding:6px 10px;border:none;border-radius:4px;cursor:pointer;"
-            onclick="window.open('https://3d.neovintagehome.com','_blank')">
-            Visit Site
-          </button>
-        </div>`;
-
-      marker.addListener("click", () => {
-        infoWindow.setContent(popupContent);
-        infoWindow.open(map, marker);
-      });
-    }
-  } catch (err) {
-    console.error("❌ Failed to load KML:", err);
-  }
+  console.log("✅ Map initialized with retro style and live KML.");
 }
-
-window.initMap = initMap;
