@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Neovintage Home Map</title>
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+
+    <script src="map.js"></script>
+
+    <!-- Async Google Maps API load -->
+    <script
+      async
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAE-A0Irud0EMWOQVANj048sBrgAMSfCV0&callback=initMap&v=weekly"
+    ></script>
+  </body>
+</html>
