@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Retro My Maps App</title>
+<style>
+  html, body, #map { width:100%; height:100%; margin:0; padding:0; }
+  .info-window { font-family: Roboto, Arial, sans-serif; font-size:14px; max-width:300px; }
+  .info-window h3 { font-size:16px; margin:0 0 5px; color:#333; }
+  .info-window p { margin:0; color:#555; }
+</style>
+</head>
+<body>
+<div id="map"></div>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"></script>
+<script>
+async function initMap() {
+  const retroStyle = [
+    { elementType: "geometry", stylers: [{ color: "#ebe3cd" }] },
+    { elementType: "labels.text.fill", stylers: [{ color: "#523735" }] },
+    { elementType: "labels.text.stroke", stylers: [{ color: "#f5f1e6" }] },
+    { featureType: "water", elementType: "geometry.fill", stylers: [{ color: "#b9d3c2" }] }
+  ];
+
+  const map = new google.maps.Map(document.getElementById("map"), {
+    center: { lat: 53.727946223940904, lng: 17.71066259801293 },
+    zoom: 4,
+    styles: retroStyle,
+    gestureHandling: "greedy",
+    disableDefaultUI: true,
+    streetViewControl: true
+  });
+
+  const infoWindow = new google.maps.InfoWindow();
+
+  // Fetch KML from your server proxy
+  const res = await fetch('/kml');
+  const kmlText = await res.text();
+  parseKml(kmlText, map, infoWindow);
+}
+
+function parseKml(kmlString, map, infoWindow) {
+  const parser = new DOMParser();
+  const kml = parser.parseFromString(kmlString, "application/xml");
+  const placemarks = kml.querySelectorAll("Placemark");
+
+  placemarks.forEach(pm => {
+    const name = pm.querySelector("name")?.textContent || "";
+    const description = pm.querySelector("description")?.textContent || "";
+    const coordText = pm.querySelector("Point > coordinates")?.textContent?.trim();
+    if (!coordText) return;
+    const [lng, lat] = coordText.split(",").map(Number);
+
+    const iconUrl = pm.querySelector("Style IconStyle Icon href")?.textContent
+                  || "https://maps.google.com/mapfiles/kml/paddle/red-circle.png";
+
+    const marker = new google.maps.Marker({
+      position: { lat, lng },
+      map,
+      title: name,
+      icon: { url: iconUrl, scaledSize: new google.maps.Size(32, 32) }
+    });
+
+    marker.addListener("click", () => {
+      const content = `<div class="info-window"><h3>${name}</h3><p>${description}</p></div>`;
+      infoWindow.setContent(content);
+      infoWindow.open(map, marker);
+    });
+  });
+}
+
+window.onload = initMap;
+</script>
+</body>
+</html>
