@@ -1,4 +1,5 @@
 function initMap() {
+  // Retro map style
   const retroStyle = [
     { elementType: "geometry", stylers: [{ color: "#ebe3cd" }] },
     { elementType: "labels.text.fill", stylers: [{ color: "#523735" }] },
@@ -15,36 +16,47 @@ function initMap() {
     streetViewControl: true
   });
 
-  const kmlUrl =
-    "https://www.google.com/maps/d/u/0/kml?forcekml=1&mid=1T_TihQ5Qmy_rYiQdrJRSeIUtUOAHq-Q";
+  // Live My Maps KML
+  const kmlUrl = "https://www.google.com/maps/d/u/0/kml?forcekml=1&mid=1T_TihQ5Qmy_rYiQdrJRSeIUtUOAHq-Q";
 
+  // Custom icon
+  const customIcon = "./icon.png"; // PNG in same folder
+
+  // KML Layer
   const kmlLayer = new google.maps.KmlLayer({
     url: kmlUrl,
     map: map,
     preserveViewport: true,
-    suppressInfoWindows: false,
+    suppressInfoWindows: true, // we create our own popups
   });
 
-  const customIcon = "https://3d.neovintagehome.com/neovintagehome-map/neovintage_home.png"; // your custom marker PNG
-
-  // KML doesn't expose markers directly, so we listen for click events and create our own info windows
   const infoWindow = new google.maps.InfoWindow();
 
-  kmlLayer.addListener("click", function(event) {
+  // Click on KML placemarks
+  kmlLayer.addListener("click", (event) => {
     const content = `
-      <div style="min-width:200px;">
-        <h3 style="margin:0;">${event.featureData.name}</h3>
-        <div>${event.featureData.description || ""}</div>
-        <a href="${event.featureData.link || "#"}" target="_blank">Open location</a>
-      </div>`;
+      <div style="max-width:250px; font-family:Roboto,Arial,sans-serif;">
+        <h3 style="margin:0 0 5px; color:#523735;">${event.featureData.name}</h3>
+        <div style="margin-bottom:5px;">${event.featureData.description || ""}</div>
+        <button style="
+          background:#523735; color:white; border:none;
+          padding:6px 10px; border-radius:4px; cursor:pointer;"
+          onclick="window.open('https://3d.neovintagehome.com','_blank')">
+          Visit Site
+        </button>
+      </div>
+    `;
     infoWindow.setContent(content);
     infoWindow.setPosition(event.latLng);
     infoWindow.open(map);
   });
 
+  // Optional: debug KML status
   kmlLayer.addListener("status_changed", () => {
-    console.log("KML status:", kmlLayer.getStatus());
+    console.log("KML Status:", kmlLayer.getStatus());
   });
 
-  console.log("✅ Map initialized with retro style and live KML.");
+  console.log("✅ Retro map with live KML and custom popups initialized.");
 }
+
+window.initMap = initMap;
