@@ -9,18 +9,24 @@ function initMap() {
     .then((response) => response.json())
     .then((markers) => {
       markers.forEach((m) => {
-        // Create an AdvancedMarkerElement
+        // Create a custom icon element if m.icon exists
+        const markerContent = m.icon
+          ? `<img src="${m.icon}" alt="${m.name}" style="width:32px;height:32px;">`
+          : `<div class="default-marker"></div>`;
+
+        // Create an AdvancedMarkerElement with custom icon
         const marker = new google.maps.marker.AdvancedMarkerElement({
           map,
           position: { lat: m.lat, lng: m.lng },
-          title: m.name
+          title: m.name,
+          content: markerContent
         });
 
         // Popup content
         const content = `
           <div class="marker-popup">
             <h3>${m.name}</h3>
-            ${m.image ? `<img src="${m.image}" alt="${m.name}"/>` : ""}
+            ${m.image ? `<img src="${m.image}" alt="${m.name}" style="max-width:200px;">` : ""}
             ${m.description ? `<p>${m.description}</p>` : ""}
             ${m.link ? `<a href="${m.link}" target="_blank">View Property</a>` : ""}
           </div>
@@ -28,11 +34,13 @@ function initMap() {
 
         const infoWindow = new google.maps.InfoWindow({ content });
 
-        marker.addListener("click", () => infoWindow.open({
-          anchor: marker,
-          map,
-          shouldFocus: false
-        }));
+        marker.addListener("click", () => {
+          infoWindow.open({
+            anchor: marker,
+            map,
+            shouldFocus: false
+          });
+        });
       });
     })
     .catch((err) => console.error("Error loading markers.json:", err));
