@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>NeoVintageHome Map</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+        width: 100%;
+      }
+
+      .custom-marker {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transform: translate(-50%, -100%);
+      }
+
+      .custom-marker img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+      }
+
+      .custom-marker-label {
+        background: white;
+        border: 1px solid #ccc;
+        padding: 2px 6px;
+        font-size: 12px;
+        border-radius: 6px;
+        margin-top: 4px;
+      }
+    </style>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD01f1iP-ZmW0n8Ymeg8jSBVN3LcCK0zEE&callback=initMap&v=weekly&libraries=marker"
+      async
+      defer
+    ></script>
+    <script src="map.js" defer></script>
+  </head>
+  <body>
+    <div id="map"></div>
+  </body>
+</html>
