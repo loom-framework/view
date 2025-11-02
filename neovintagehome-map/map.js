@@ -1,23 +1,19 @@
-// map.js
-export function initMap() {
+function initMap() {
   const map = new google.maps.Map(document.getElementById("map"), {
     center: { lat: 0, lng: 0 },
     zoom: 2,
-    mapId: "801093b20e8759f26d8f23d9", // Replace with your Map ID
-    gestureHandling: "greedy",
-    disableDefaultUI: false,
+    mapId: "801093b20e8759f26d8f23d9" // optional, needed for AdvancedMarkerElement styling
   });
 
-  // Load markers from JSON
   fetch("markers.json")
     .then((response) => response.json())
     .then((markers) => {
       markers.forEach((m) => {
-        // Create AdvancedMarkerElement
+        // Create an AdvancedMarkerElement
         const marker = new google.maps.marker.AdvancedMarkerElement({
           map,
           position: { lat: m.lat, lng: m.lng },
-          title: m.name,
+          title: m.name
         });
 
         // Popup content
@@ -30,21 +26,17 @@ export function initMap() {
           </div>
         `;
 
-        // InfoWindow for popup
-        const infoWindow = new google.maps.InfoWindow({
-          content,
-        });
+        const infoWindow = new google.maps.InfoWindow({ content });
 
-        // Show popup on click
-        marker.addListener("click", () => {
-          infoWindow.open(map, marker);
-        });
+        marker.addListener("click", () => infoWindow.open({
+          anchor: marker,
+          map,
+          shouldFocus: false
+        }));
       });
     })
-    .catch((err) => {
-      console.error("Error loading markers.json:", err);
-    });
+    .catch((err) => console.error("Error loading markers.json:", err));
 }
 
-// Expose initMap globally for callback
+// Make initMap global
 window.initMap = initMap;
