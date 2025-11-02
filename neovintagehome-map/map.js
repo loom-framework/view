@@ -11,7 +11,7 @@ function initMap() {
       markers.forEach((m) => {
         // Create a custom icon element if m.icon exists
         const markerContent = m.icon
-          ? `<img src="${m.icon}" alt="${m.name}" style="width:32px;height:32px;">`
+          ? `<img src="icon.png" alt="${m.name}" style="width:32px;height:32px;">`
           : `<div class="default-marker"></div>`;
 
         // Create an AdvancedMarkerElement with custom icon
