@@ -1,53 +1,69 @@
 async function initMap() {
+  // Load required Google Maps libraries
   const { Map } = await google.maps.importLibrary("maps");
   const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
 
   const map = new Map(document.getElementById("map"), {
-    zoom: 3,
-    center: { lat: 20, lng: 0 },
-    mapId: "801093b20e8759f26d8f23d9", // replace if you have your own Map ID
+    zoom: 10,
+    center: { lat: 37.43238, lng: -122.16795 },
+    mapId: "4504f8b37365c3d0",
   });
 
-  // Load markers from your JSON
-  fetch("markers.json")
-    .then(response => response.json())
-    .then(markers => {
-      markers.forEach(m => {
-        // Create custom HTML marker
-        const markerDiv = document.createElement("div");
-        markerDiv.classList.add("custom-marker");
-        markerDiv.innerHTML = `
-          <img src="icon.png" alt="Marker" />
-          <div class="custom-marker-label">${m.name}</div>
-        `;
+  try {
+    const response = await fetch("./markers.json");
+    const properties = await response.json();
 
-        const marker = new AdvancedMarkerElement({
-          map,
-          position: { lat: m.lat, lng: m.lng },
-          content: markerDiv,
-          title: m.name,
-        });
+    const bounds = new google.maps.LatLngBounds();
 
-        const infoWindow = new google.maps.InfoWindow({
-          content: `
-            <div style="max-width:200px;">
-              <h3>${m.name}</h3>
-              ${m.image ? `<img src="${m.image}" style="width:100%;border-radius:8px;margin:5px 0;" />` : ""}
-              ${m.description ? `<p>${m.description}</p>` : ""}
-              ${m.link ? `<a href="${m.link}" target="_blank">View more</a>` : ""}
-            </div>
-          `,
-        });
-
-        marker.addListener("click", () => {
-          infoWindow.open({
-            anchor: marker,
-            map,
-          });
-        });
+    properties.forEach((property) => {
+      const marker = new AdvancedMarkerElement({
+        map,
+        position: property.position,
+        title: property.description,
+        content: buildContent(property),
       });
-    })
-    .catch(err => console.error("Error loading markers:", err));
+
+      marker.addListener("click", () => toggleHighlight(marker, property));
+      bounds.extend(property.position);
+    });
+
+    // Fit map to include all markers
+    map.fitBounds(bounds);
+  } catch (err) {
+    console.error("Error loading markers.json:", err);
+  }
 }
 
-window.initMap = initMap;
+function toggleHighlight(markerView, property) {
+  if (markerView.content.classList.contains("highlight")) {
+    markerView.content.classList.remove("highlight");
+    markerView.zIndex = null;
+  } else {
+    document.querySelectorAll(".property").forEach((el) => el.classList.remove("highlight"));
+    markerView.content.classList.add("highlight");
+    markerView.zIndex = 1;
+  }
+}
+
+function buildContent(property) {
+  const content = document.createElement("div");
+  content.classList.add("property");
+
+  content.innerHTML = `
+    <div class="icon">
+      <img src="./icon.png" alt="${property.type}" />
+    </div>
+    <div class="details">
+      <div class="price">${property.price}</div>
+      <div class="address">${property.address}</div>
+      <div class="features">
+        <div>🛏 ${property.bed}</div>
+        <div>🛁 ${property.bath}</div>
+        <div>📏 ${property.size} ft<sup>2</sup></div>
+      </div>
+    </div>
+  `;
+  return content;
+}
+
+initMap();
