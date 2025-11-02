@@ -1,40 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="utf-8" />
     <title>NeoVintageHome Map</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
     <style>
-      html,
-      body {
+      html, body {
         height: 100%;
         margin: 0;
         padding: 0;
       }
       #map {
-        width: 100%;
         height: 100%;
-      }
-      .marker-popup {
-        font-family: Arial, sans-serif;
-        max-width: 240px;
-      }
-      .marker-popup img {
         width: 100%;
-        border-radius: 8px;
-        margin-bottom: 8px;
+      }
+
+      .custom-marker {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transform: translate(-50%, -100%);
+      }
+
+      .custom-marker img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+      }
+
+      .custom-marker-label {
+        background: white;
+        border: 1px solid #ccc;
+        padding: 2px 6px;
+        font-size: 12px;
+        border-radius: 6px;
+        margin-top: 4px;
       }
     </style>
-
-    <!-- Load Google Maps API -->
     <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD01f1iP-ZmW0n8Ymeg8jSBVN3LcCK0zEE&v=weekly&libraries=marker"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD01f1iP-ZmW0n8Ymeg8jSBVN3LcCK0zEE&callback=initMap&v=weekly&libraries=marker"
       async
       defer
     ></script>
-
-    <!-- Load main JS -->
-    <script type="module" src="map.js"></script>
+    <script src="map.js" defer></script>
   </head>
   <body>
     <div id="map"></div>
