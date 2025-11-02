@@ -60,7 +60,7 @@ body {
 .property .icon img {
   width: 28px;
   height: 28px;
-  border-radius: 50%;
+  /*border-radius: 50%;*/
 }
 
 /* Hidden details by default */
