@@ -1,70 +1,50 @@
-async function initMap() {
-  const retroStyle = [
-    { elementType: "geometry", stylers: [{ color: "#ebe3cd" }] },
-    { elementType: "labels.text.fill", stylers: [{ color: "#523735" }] },
-    { elementType: "labels.text.stroke", stylers: [{ color: "#f5f1e6" }] },
-    { featureType: "water", elementType: "geometry.fill", stylers: [{ color: "#b9d3c2" }] }
-  ];
-
-  // 🗺️ Initialize map
+// map.js
+export function initMap() {
   const map = new google.maps.Map(document.getElementById("map"), {
-    center: { lat: 53.7279, lng: 17.7106 },
-    zoom: 4,
-    mapId: "801093b20e8759f26d8f23d9", // 👈 Replace with your actual Map ID
-    styles: retroStyle,
+    center: { lat: 0, lng: 0 },
+    zoom: 2,
+    mapId: "801093b20e8759f26d8f23d9", // Replace with your Map ID
     gestureHandling: "greedy",
-    disableDefaultUI: true,
-    streetViewControl: true
+    disableDefaultUI: false,
   });
 
-  // 🧩 Load live KML layer (base map)
-  const kmlUrl = "https://www.google.com/maps/d/u/0/kml?forcekml=1&mid=1T_TihQ5Qmy_rYiQdrJRSeIUtUOAHq-Q";
-  const kmlLayer = new google.maps.KmlLayer({
-    url: kmlUrl,
-    map: map,
-    preserveViewport: true,
-    suppressInfoWindows: true
-  });
+  // Load markers from JSON
+  fetch("markers.json")
+    .then((response) => response.json())
+    .then((markers) => {
+      markers.forEach((m) => {
+        // Create AdvancedMarkerElement
+        const marker = new google.maps.marker.AdvancedMarkerElement({
+          map,
+          position: { lat: m.lat, lng: m.lng },
+          title: m.name,
+        });
 
-  // 🖼️ Load custom JSON markers
-  try {
-    const response = await fetch("markers.json");
-    const markers = await response.json();
-
-    const infoWindow = new google.maps.InfoWindow();
-
-    markers.forEach((markerData) => {
-      const position = { lat: markerData.lat, lng: markerData.lng };
-
-      // Custom icon (your PNG)
-      const iconElement = document.createElement("img");
-      iconElement.src = "marker-icon.png"; // 👈 Put your PNG in same folder
-      iconElement.style.width = "32px";
-      iconElement.style.height = "32px";
-
-      const marker = new google.maps.marker.AdvancedMarkerElement({
-        map,
-        position,
-        title: markerData.title,
-        content: iconElement,
-      });
-
-      marker.addListener("click", () => {
-        const html = `
-          <div class="info-window">
-            <h3>${markerData.title || "Untitled"}</h3>
-            <p>${markerData.description || "No description available."}</p>
-            ${markerData.image ? `<img src="${markerData.image}" style="width:100%; border-radius:6px; margin-top:6px;">` : ""}
+        // Popup content
+        const content = `
+          <div class="marker-popup">
+            <h3>${m.name}</h3>
+            ${m.image ? `<img src="${m.image}" alt="${m.name}"/>` : ""}
+            ${m.description ? `<p>${m.description}</p>` : ""}
+            ${m.link ? `<a href="${m.link}" target="_blank">View Property</a>` : ""}
           </div>
         `;
-        infoWindow.setContent(html);
-        infoWindow.open(map, marker);
-      });
-    });
 
-  } catch (err) {
-    console.error("Error loading markers.json:", err);
-  }
+        // InfoWindow for popup
+        const infoWindow = new google.maps.InfoWindow({
+          content,
+        });
+
+        // Show popup on click
+        marker.addListener("click", () => {
+          infoWindow.open(map, marker);
+        });
+      });
+    })
+    .catch((err) => {
+      console.error("Error loading markers.json:", err);
+    });
 }
 
+// Expose initMap globally for callback
 window.initMap = initMap;

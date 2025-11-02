@@ -2,57 +2,28 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Neovintage Home Map</title>
   <style>
-    #map { height: 100vh; width: 100%; }
+    #map {
+      height: 100vh;
+      width: 100%;
+    }
+    .marker-popup {
+      max-width: 250px;
+    }
+    .marker-popup img {
+      width: 100%;
+      height: auto;
+    }
   </style>
 </head>
 <body>
   <div id="map"></div>
 
-  <!-- Load Google Maps JS API with 'marker' library -->
   <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD01f1iP-ZmW0n8Ymeg8jSBVN3LcCK0zEE&v=weekly&libraries=marker&callback=initMap"
-    async
-    defer
-  ></script>
-
-  <script>
-    async function initMap() {
-      const map = new google.maps.Map(document.getElementById("map"), {
-        center: { lat: 0, lng: 0 },
-        zoom: 2,
-      });
-
-      try {
-        const response = await fetch('markers.json');
-        const markers = await response.json();
-
-        markers.forEach(data => {
-          // Use AdvancedMarkerElement instead of deprecated Marker
-          const marker = new google.maps.marker.AdvancedMarkerElement({
-            map,
-            position: { lat: data.lat, lng: data.lng },
-            title: data.name,
-          });
-
-          // Add info popup
-          if (data.description) {
-            const infoWindow = new google.maps.InfoWindow({
-              content: data.description
-            });
-
-            marker.addListener("click", () => {
-              infoWindow.open(marker.map, marker);
-            });
-          }
-        });
-
-      } catch (error) {
-        console.error("Error loading markers.json:", error);
-      }
-    }
+    async defer>
   </script>
+  <script type="module" src="map.js"></script>
 </body>
 </html>
