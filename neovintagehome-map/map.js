@@ -7,6 +7,16 @@ async function initMap() {
     zoom: 10,
     center: { lat: 37.43238, lng: -122.16795 },
     mapId: "801093b20e8759f26d8f23d9",
+      
+      styles: retroStyle,
+        gestureHandling: "greedy",
+
+        // 🔹 Disable everything except Street View
+        disableDefaultUI: true,
+        streetViewControl: true
+      
+      
+      
   });
 
   try {
