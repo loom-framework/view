@@ -11,40 +11,33 @@
 <body>
   <div id="map"></div>
 
-  <script type="module">
-    import { Loader } from "https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&v=weekly&libraries=marker";
+  <!-- Load Google Maps JS API with 'marker' library -->
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&v=weekly&libraries=marker&callback=initMap"
+    async
+    defer
+  ></script>
 
-    const loader = new Loader({
-      apiKey: "YOUR_API_KEY",
-      version: "weekly",
-      libraries: ["marker"],
-    });
-
-    loader.load().then(() => {
-      initMap();
-    });
-
+  <script>
     async function initMap() {
-      // Initialize map
       const map = new google.maps.Map(document.getElementById("map"), {
         center: { lat: 0, lng: 0 },
         zoom: 2,
       });
 
-      // Load markers.json
       try {
         const response = await fetch('markers.json');
         const markers = await response.json();
 
         markers.forEach(data => {
-          // Create an AdvancedMarkerElement
+          // Use AdvancedMarkerElement instead of deprecated Marker
           const marker = new google.maps.marker.AdvancedMarkerElement({
             map,
             position: { lat: data.lat, lng: data.lng },
             title: data.name,
           });
 
-          // Add popup info
+          // Add info popup
           if (data.description) {
             const infoWindow = new google.maps.InfoWindow({
               content: data.description
