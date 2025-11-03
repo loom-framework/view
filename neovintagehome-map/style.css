@@ -26,7 +26,7 @@ body {
   color: #263238;
   display: flex;
   font-size: 14px;
-  gap: 10px;
+  gap: unset;
   height: 40px;
   justify-content: center;
   padding: 4px;
@@ -131,6 +131,8 @@ body {
 }
 
 .property.highlight .icon img {
-  width: 40px;
-  height: 40px;
+display: none;
+visibility: hidden;
+width: 0px;
+height: 0px;
 }
