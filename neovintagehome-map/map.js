@@ -20,7 +20,7 @@ async function initMap() {
       styles: retroStyle,
         gestureHandling: "greedy",
 
-        // 🔹 Disable everything except Street View
+        // Disable UI
         disableDefaultUI: true,
         streetViewControl: false
       
