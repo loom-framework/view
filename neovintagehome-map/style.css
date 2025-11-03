@@ -124,7 +124,10 @@ body {
   display: flex;
   font-size: 10px;
   gap: 5px;
-  padding: 5px;
+  padding: 7px;
+  padding-right: 9px;
+  padding-left: 9px;
+      
   z-index: 1;
 }
 
