@@ -21,7 +21,7 @@ body {
 /* Property (marker) base */
 .property {
   align-items: center;
-  background-color: #282828;
+  background-color:  ‪#ff7f32‬;
   border-radius: 50%;
   color: #263238;
   display: flex;
@@ -39,7 +39,7 @@ body {
 .property::after {
   border-left: 9px solid transparent;
   border-right: 9px solid transparent;
-  border-top: 9px solid #282828;
+  border-top: 9px solid  ‪#ff7f32‬;
   content: "";
   height: 0;
   left: 50%;
