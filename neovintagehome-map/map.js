@@ -68,19 +68,38 @@ function buildContent(property) {
   const content = document.createElement("div");
   content.classList.add("property");
 
+    
+    
+  
+    
+    
+    
+    
   content.innerHTML = `
     <div class="icon">
       <img src="./icon.png" alt="${property.type}" />
     </div>
-    <div class="details">
-      <div class="price">${property.price}</div>
-      <div class="address">${property.address}</div>
-      <div class="features">
-        <div>🛏 ${property.bed}</div>
-        <div>🛁 ${property.bath}</div>
-        <div>📏 ${property.size} ft<sup>2</sup></div>
-      </div>
-    </div>
+     <div class="details">
+        <div class="price">${property.price}</div>
+        <div class="address">${property.address}</div>
+        <div class="features">
+        <div>
+            <i aria-hidden="true" class="fa fa-bed fa-lg bed" title="bedroom"></i>
+            <span class="fa-sr-only">bedroom</span>
+            <span>${property.bed}</span>
+        </div>
+        <div>
+            <i aria-hidden="true" class="fa fa-bath fa-lg bath" title="bathroom"></i>
+            <span class="fa-sr-only">bathroom</span>
+            <span>${property.bath}</span>
+        </div>
+        <div>
+            <i aria-hidden="true" class="fa fa-ruler fa-lg size" title="size"></i>
+            <span class="fa-sr-only">size</span>
+            <span>${property.size} ft<sup>2</sup></span>
+        </div>
+        </div>
+    
   `;
   return content;
 }
