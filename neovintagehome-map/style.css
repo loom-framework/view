@@ -112,7 +112,7 @@ body {
 }
 
 
-.property.highlight .image img {
+.property .image img {
   display: block;
   width: 100%;
   height: 180px; /* adjust height as needed */

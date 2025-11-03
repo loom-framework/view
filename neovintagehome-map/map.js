@@ -89,7 +89,7 @@ function buildContent(property) {
         <div>🛁 ${property.bath}</div>
         <div>📏 ${property.size} ft<sup>2</sup></div>
       </div>
-    </div>
+    </div></div>
   `;
   return content;
 }
