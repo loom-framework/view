@@ -92,7 +92,9 @@ function buildContent(property) {
       </div>
       
        <div class="listing">
-        <div class="buy">LOREM </div>
+        <a href="https://example.com" target="_blank" rel="noopener noreferrer">
+  <div class="buy">LOREM</div>
+</a>
       </div>
       
       
