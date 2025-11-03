@@ -13,7 +13,7 @@ async function initMap() {
     
     
   const map = new Map(document.getElementById("map"), {
-    zoom: 10,
+    zoom: 3,
     center: { lat: 37.43238, lng: -122.16795 },
     mapId: "801093b20e8759f26d8f23d9",
       
