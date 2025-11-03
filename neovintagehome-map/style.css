@@ -108,6 +108,16 @@ body {
   padding: 5px;
 }
 
+.property .features .buy {
+  align-items: center;
+  background: red;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  display: flex;
+  font-size: 10px;
+  gap: 5px;
+  padding: 5px;
+}
 
 /* Highlighted marker state */
 .property.highlight {
