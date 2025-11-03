@@ -89,8 +89,13 @@ function buildContent(property) {
         <div>🛏 ${property.bed}</div>
         <div>🛁 ${property.bath}</div>
         <div>📏 ${property.size} ft<sup>2</sup></div>
+      </div>
+      
+       <div class="listing">
         <div class="buy">LOREM </div>
       </div>
+      
+      
     </div></div>
   `;
   return content;

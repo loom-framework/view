@@ -97,6 +97,13 @@ body {
   gap: 10px;
 }
 
+.property .listing {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
 .property .features > div {
   align-items: center;
   background: #F5F5F5;
@@ -108,7 +115,7 @@ body {
   padding: 5px;
 }
 
-.property .features .buy {
+.property .listing .buy {
   align-items: center;
   background: red;
   border-radius: 5px;
