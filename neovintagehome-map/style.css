@@ -77,6 +77,25 @@ body {
   margin-top: 4px;
 }
 
+.property .features {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.property .features > div {
+  align-items: center;
+  background: #F5F5F5;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  display: flex;
+  font-size: 10px;
+  gap: 5px;
+  padding: 5px;
+}
+
+
 /* Highlighted marker state */
 .property.highlight {
   background-color: #ffffff;
