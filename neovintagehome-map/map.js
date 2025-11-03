@@ -76,9 +76,9 @@ function buildContent(property) {
     
   content.innerHTML = `
   
-   <!--// <div class="icon">
+   <div class="icon">
       <img src="./SIGNAL_TEST.jpg" alt="${property.type}" />
-    </div>//-->
+    </div>
     <div class="details">
      <div class="image">
     <img src="./SIGNAL_TEST.jpg" alt="building">
