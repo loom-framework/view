@@ -22,7 +22,7 @@ async function initMap() {
 
         // 🔹 Disable everything except Street View
         disableDefaultUI: true,
-        streetViewControl: true
+        streetViewControl: false
       
       
       
