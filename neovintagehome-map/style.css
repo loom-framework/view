@@ -118,15 +118,16 @@ body {
 
 .property .listing .buy {
   align-items: center;
-  background: red;
+  background: none;
   border-radius: 5px;
-  border: 1px solid #ccc;
+  border: 1px solid rgba(255, 127, 50, 1);
   display: flex;
   font-size: 10px;
   gap: 5px;
   padding: 7px;
   padding-right: 9px;
   padding-left: 9px;
+  color: rgba(255, 127, 50, 1);
       
   z-index: 1;
 }
@@ -138,7 +139,8 @@ body {
 }
 
 .property .listing .buy:hover {
-  background: black; 
+  background: rgba(255, 127, 50, 1)‬; 
+  color: white;
 }
 
 
