@@ -81,7 +81,7 @@ function buildContent(property) {
     </div>
     <div class="details">
      <div class="image">
-    <img src="./SIGNAL_TEST.jpg" alt="building">
+    <img src="${property.image}" alt="building">
   </div>
       <div class="price">${property.price}</div>
       <div class="address">${property.address}</div>
@@ -92,7 +92,7 @@ function buildContent(property) {
       </div>
       
        <div class="listing">
-        <a href="https://example.com" target="_blank" rel="noopener noreferrer">
+        <a href="${property.url" target="_blank" rel="noopener noreferrer">
   <div class="buy">Open Property Page</div>
 </a>
       </div>
