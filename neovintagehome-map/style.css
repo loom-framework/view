@@ -157,7 +157,7 @@ body {
 }
 
 .property.highlight::after {
-  border-top: 9px solid #ffffff;
+  border-top: 9px solid transparent;
 }
 
 
