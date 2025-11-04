@@ -88,7 +88,7 @@ function buildContent(property) {
       <div class="features">
         <div>🛏 ${property.bed}</div>
         <div>🛁 ${property.bath}</div>
-        <div>📏 ${property.size} ft<sup>2</sup></div>
+        <div>📏 ${property.size}</div>
       </div>
       
        <div class="listing">
