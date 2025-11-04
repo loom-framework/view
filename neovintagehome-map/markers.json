@@ -6,7 +6,7 @@
     "price": "€219,000",
     "bed": 2,
     "bath": 1,
-    "size": 9,
+    "size": "6.99ha Land",
     "image": "https://3d.neovintagehome.com/neovintagehome-map/media/new-zealand.png",
     "position": { "lat": -35.0553635, "lng": 173.6450166 },
     "url": "https://www.neovintagehome.com/property-catalog/new-zealand/super-affordable-off-grid-paradise"
@@ -18,7 +18,7 @@
     "price": "€450,000",
     "bed": 2,
     "bath": 2,
-    "size": 9,
+    "size": "187/m²",
     "image": "https://3d.neovintagehome.com/neovintagehome-map/media/canada.png",
     "position": { "lat": 45.92996, "lng": -66.07496 },
     "url": "https://www.neovintagehome.com/property-catalog/canada/16-beecher-lane"
@@ -30,7 +30,7 @@
     "price": "€1,350,000",
     "bed": 18,
     "bath": 6,
-    "size": 3,450m²,
+    "size": "3,450m²",
     "image": "https://3d.neovintagehome.com/neovintagehome-map/media/germany.png",
     "position": { "lat": 53.0778389, "lng": 10.0001897 },
     "url": "https://www.neovintagehome.com/property-catalog/germany/half-timbered-house"
@@ -42,7 +42,7 @@
     "price": "€399,974",
     "bed": 8,
     "bath": 7,
-    "size": 425m²,
+    "size": "425m²",
     "image": "https://3d.neovintagehome.com/neovintagehome-map/media/seychelles.png",
     "position": { "lat": -4.7663409, "lng": 55.5008905 },
     "url": "https://www.neovintagehome.com/property-catalog/seychelles/green-village"
@@ -54,7 +54,7 @@
     "price": "€13,000",
     "bed": 0,
     "bath": 0,
-    "size": 26m²,
+    "size": "26m²",
     "image": "https://3d.neovintagehome.com/neovintagehome-map/media/united-states.png",
     "position": { "lat": 61.5474552, "lng": -149.5918248 },
     "url": "https://www.neovintagehome.com/property-catalog/united-states/cabin-or-office"
@@ -66,7 +66,7 @@
     "price": "€370,339",
     "bed": 1,
     "bath": 2,
-    "size": 37m²,
+    "size": "37m²",
     "image": "https://3d.neovintagehome.com/neovintagehome-map/media/luxembourg.png",
     "position": { "lat": 49.6662817, "lng": 6.035435 },
     "url": "https://www.neovintagehome.com/property-catalog/luxembourg/studio-in-kehlen"
@@ -78,7 +78,7 @@
     "price": "€64,000",
     "bed": 1,
     "bath": 1,
-    "size": 38m²,
+    "size": "38m²",
     "image": "https://3d.neovintagehome.com/neovintagehome-map/media/uruguay.png",
     "position": { "lat": -34.4451649, "lng": -57.8578032 },
     "url": "https://www.neovintagehome.com/property-catalog/uruguay/apartment-in-hotel"
