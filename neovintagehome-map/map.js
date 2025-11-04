@@ -3,13 +3,13 @@ async function initMap() {
   const { Map } = await google.maps.importLibrary("maps");
   const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
 
-    // Map style (retro)
+  /*  // Map style (retro)
   const retroStyle = [
     { elementType: "geometry", stylers: [{ color: "#ebe3cd" }] },
     { elementType: "labels.text.fill", stylers: [{ color: "#523735" }] },
     { elementType: "labels.text.stroke", stylers: [{ color: "#f5f1e6" }] },
     { featureType: "water", elementType: "geometry.fill", stylers: [{ color: "#b9d3c2" }] }
-  ];
+  ]; */
     
     
   const map = new Map(document.getElementById("map"), {
@@ -17,7 +17,7 @@ async function initMap() {
     center: { lat: 37.43238, lng: -122.16795 },
     mapId: "801093b20e8759f26d8f23d9",
       
-      styles: retroStyle,
+     /* styles: retroStyle,*/
         gestureHandling: "greedy",
 
         // Disable UI
