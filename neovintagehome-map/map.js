@@ -33,10 +33,7 @@ async function initMap() {
   map.setZoom(3);
 });
     
-    map.fitBounds(bounds);
-google.maps.event.addListenerOnce(map, "bounds_changed", () => {
-  map.setZoom(3);
-});
+
 
 
   try {
