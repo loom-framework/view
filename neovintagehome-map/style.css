@@ -139,7 +139,7 @@ body {
 }
 
 .property .listing .buy:hover {
-  background: 0xff7f32‬; 
+  background-color: rgba(255, 127, 50, 1); 
   color: white;
 }
 
