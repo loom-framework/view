@@ -27,6 +27,17 @@ async function initMap() {
       
       
   });
+    
+    
+    google.maps.event.addListenerOnce(map, "tilesloaded", () => {
+  map.setZoom(3);
+});
+    
+    map.fitBounds(bounds);
+google.maps.event.addListenerOnce(map, "bounds_changed", () => {
+  map.setZoom(3);
+});
+
 
   try {
     const response = await fetch("./markers.json");
