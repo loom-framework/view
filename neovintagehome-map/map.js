@@ -29,7 +29,7 @@ async function initMap() {
   });
     
     
-    google.maps.event.addListenerOnce(map, "tilesloaded", () => {
+google.maps.event.addListenerOnce(map, "tilesloaded", () => {
   map.setZoom(3);
 });
     
