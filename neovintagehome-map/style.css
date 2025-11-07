@@ -20,6 +20,12 @@ body {
   overflow: hidden;
 }
 
+::-webkit-scrollbar {
+    height: 16px;
+    overflow: hidden;
+    width: 16px
+}
+
 /* Property (marker) base */
 .property {
   align-items: center;
